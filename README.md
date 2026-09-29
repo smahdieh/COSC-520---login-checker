@@ -56,7 +56,9 @@ Download: https://doi.org/10.5281/zenodo.23045991
 
 > Sadatbenis, M. (2026). *Login Dataset for COSC 520 Login Checker* [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.23045991
 
-Or regenerate it exactly with `python data/generate_logins.py` (seed 520).
+**Access is restricted:** the Zenodo record is public, but the files are
+available on request only. Use "Request access" on the Zenodo page, or
+regenerate the identical dataset with `python data/generate_logins.py` (seed 520).
 
 | File | Contents |
 |---|---|
