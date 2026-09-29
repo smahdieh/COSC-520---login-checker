@@ -20,10 +20,15 @@ import seaborn as sns  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 
 ORDER = ["Linear search", "Binary search", "Hash table", "Bloom filter", "Cuckoo filter"]
-# Colorblind-safe palette; each structure keeps the same color and marker in every plot.
-# Picks blue, brown, green, orange, purple so no two colors look alike.
-_COLORS = sns.color_palette("colorblind")
-PALETTE = dict(zip(ORDER, [_COLORS[i] for i in (0, 5, 2, 1, 4)]))
+# Okabe-Ito colorblind-safe colors, chosen so no two lines look alike.
+# Each structure keeps the same color and marker in every plot.
+PALETTE = {
+    "Linear search": "#3b3b3b",  # dark gray (baseline)
+    "Binary search": "#0072b2",  # blue
+    "Hash table": "#009e73",     # green
+    "Bloom filter": "#e69f00",   # orange
+    "Cuckoo filter": "#cc79a7",  # purple
+}
 MARKERS = dict(zip(ORDER, ["o", "s", "^", "D", "v"]))
 
 # Sized for one column of the ACM acmsmall template (text width ~5.5 in),
