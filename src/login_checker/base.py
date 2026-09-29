@@ -1,32 +1,25 @@
-"""Common interface shared by all login-checker data structures."""
+"""Base class for all login checkers."""
 
 from abc import ABC, abstractmethod
 
 
 class LoginChecker(ABC):
-    """Abstract base class for a structure that answers "is this login taken?".
-
-    Every implementation exposes the same two methods so the benchmark
-    code can treat all five structures uniformly.
-    """
+    """Common interface so every structure can be benchmarked the same way."""
 
     @abstractmethod
     def add(self, login: str) -> None:
-        """Insert a login into the structure.
+        """Store a login.
 
-        Input:  login -- the username to store.
-        Output: None.
+        Input: login (str). Output: None.
         """
 
     @abstractmethod
     def contains(self, login: str) -> bool:
-        """Check whether a login is (probably) already taken.
+        """Check if a login is taken.
 
-        Input:  login -- the username to look up.
-        Output: True if the login is present (filters may return a false
-                positive), False if it is definitely not present.
+        Input: login (str). Output: True if found (filters can give false positives).
         """
 
     def __contains__(self, login: str) -> bool:
-        """Allow the `login in checker` syntax; delegates to contains()."""
+        """Support `login in checker`."""
         return self.contains(login)

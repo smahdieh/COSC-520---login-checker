@@ -1,9 +1,7 @@
-"""Hash functions shared by the hash table, Bloom filter and Cuckoo filter.
+"""Hash functions used by the hash table and the filters.
 
-Python's built-in hash() is not used because it is randomly salted per
-process (PYTHONHASHSEED), which would make results non-reproducible.
-BLAKE2b from the standard library is used only as a hash *function*;
-all data structures are implemented by hand.
+We use BLAKE2b instead of Python's hash() because hash() changes
+between runs, which would make the results non-reproducible.
 """
 
 import hashlib
@@ -12,12 +10,10 @@ MASK_64 = (1 << 64) - 1
 
 
 def hash64(text: str, seed: int = 0) -> int:
-    """Hash a string to a 64-bit unsigned integer.
+    """Hash a string to a 64-bit integer.
 
-    Input:  text -- the string to hash.
-            seed -- integer selecting an independent hash function
-                    (different seeds give unrelated outputs).
-    Output: an integer in [0, 2**64).
+    Input: text, seed (a different seed gives a different hash function).
+    Output: int in [0, 2^64).
     """
     key = (seed & MASK_64).to_bytes(8, "little")
     digest = hashlib.blake2b(text.encode("utf-8"), digest_size=8, key=key).digest()
@@ -25,15 +21,9 @@ def hash64(text: str, seed: int = 0) -> int:
 
 
 def hash_pair(text: str) -> tuple[int, int]:
-    """Return two independent 32-bit hashes of a string from one digest.
+    """Split one 64-bit hash into two 32-bit hashes for double hashing.
 
-    Useful for double hashing (Kirsch & Mitzenmacher, 2006), where the i-th
-    hash position is computed as (h1 + i * h2) mod m.
-
-    Input:  text -- the string to hash.
-    Output: (h1, h2) -- two integers in [0, 2**32); h2 is forced to be odd
-            so that it is never 0 and cycles through all positions when m
-            is a power of two.
+    Input: text. Output: (h1, h2), with h2 always odd so it is never 0.
     """
     value = hash64(text)
     h1 = value & 0xFFFFFFFF
