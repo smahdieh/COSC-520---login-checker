@@ -37,8 +37,10 @@ pip install -r requirements.txt
 ## Running
 
 ```bash
-# 1. Generate the dataset
-python data/generate_logins.py          # TODO: document arguments
+# 1. Generate the dataset (10M logins, ~50 s, ~120 MB)
+python data/generate_logins.py
+#    or a smaller one for a quick try:
+python data/generate_logins.py --n 100000
 
 # 2. Run the unit tests
 pytest
@@ -50,7 +52,23 @@ python benchmarks/plot_results.py
 
 ## Dataset
 
-TODO: link to the uploaded dataset (Zenodo / Kaggle / Hugging Face / Drive).
+Download: TODO (link to uploaded dataset)
+
+Or regenerate it exactly with `python data/generate_logins.py` (seed 520).
+
+| File | Contents |
+|---|---|
+| `logins.txt` | 10,000,000 unique registered logins, one per line (~120 MB) |
+| `absent_logins.txt` | 100,000 logins guaranteed not in `logins.txt`, used for "new user" lookups and false-positive rates |
+
+Logins mix three patterns: names (`sara.patel`, `jlee42`), word pairs
+(`blue.moon874`) and random strings (`x7kq2pzd`). Average length is 11.6
+characters (min 4, max 21).
+
+**Why n = 10 million and not 1 billion:** a Python string takes about 50-60
+bytes, so 10^9 logins would need over 50 GB of RAM just for the strings. The
+test machine (Apple M1 Pro, 16 GB RAM) handles 10^7 comfortably, which is enough
+to see how each structure scales across four orders of magnitude (10^3 to 10^7).
 
 ## Use of GenAI
 
