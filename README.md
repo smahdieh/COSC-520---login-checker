@@ -54,9 +54,14 @@ TODO: link to the uploaded dataset (Zenodo / Kaggle / Hugging Face / Drive).
 
 ## Use of GenAI
 
-TODO: state which parts were written with AI assistance. For example, the
-initial repository skeleton (folder layout, config files, README outline,
-interface stubs) was generated with Claude (Anthropic).
+Generated with Claude (Anthropic), then reviewed and tested by me:
+
+- Repository skeleton: folder layout, config files, README outline, `base.py` interface
+- `hashing.py`, `linear_search.py`, `binary_search.py` and their tests
+  (`test_hashing.py`, `test_linear_search.py`, `test_binary_search.py`)
+
+Written by me: TODO (e.g. `hash_table.py`, `bloom_filter.py`, `cuckoo_filter.py`,
+their tests, dataset generator, benchmarks).
 
 ## References
 
