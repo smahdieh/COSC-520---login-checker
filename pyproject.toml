@@ -1,0 +1,10 @@
+[project]
+name = "login-checker"
+version = "0.1.0"
+description = "COSC 520 A1: comparing linear search, binary search, hashing, Bloom and Cuckoo filters"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+# Lets tests do `from login_checker.bloom_filter import BloomFilter` without installing.
+pythonpath = ["src"]
+testpaths = ["tests"]
