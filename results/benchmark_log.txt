@@ -1,0 +1,27 @@
+Loading 10,000,000 logins...
+n=     1,000  Linear search  build=    0.00s  lookup=     10.50us  fp=0.0000  mem=     0.1MB
+n=     1,000  Binary search  build=    0.00s  lookup=      0.91us  fp=0.0000  mem=     0.1MB
+n=     1,000  Hash table     build=    0.00s  lookup=      0.91us  fp=0.0000  mem=     0.2MB
+n=     1,000  Bloom filter   build=    0.00s  lookup=      1.96us  fp=0.0104  mem=     0.0MB
+n=     1,000  Cuckoo filter  build=    0.00s  lookup=      1.51us  fp=0.0008  mem=     0.0MB
+n=    10,000  Linear search  build=    0.00s  lookup=    111.74us  fp=0.0000  mem=     0.7MB
+n=    10,000  Binary search  build=    0.00s  lookup=      1.27us  fp=0.0000  mem=     0.7MB
+n=    10,000  Hash table     build=    0.03s  lookup=      1.12us  fp=0.0000  mem=     1.9MB
+n=    10,000  Bloom filter   build=    0.03s  lookup=      1.95us  fp=0.0102  mem=     0.0MB
+n=    10,000  Cuckoo filter  build=    0.01s  lookup=      1.49us  fp=0.0012  mem=     0.0MB
+n=   100,000  Linear search  build=    0.00s  lookup=   1049.31us  fp=0.0000  mem=     6.8MB
+n=   100,000  Binary search  build=    0.02s  lookup=      1.57us  fp=0.0000  mem=     6.8MB
+n=   100,000  Hash table     build=    0.52s  lookup=      1.14us  fp=0.0000  mem=    25.7MB
+n=   100,000  Bloom filter   build=    0.25s  lookup=      2.01us  fp=0.0101  mem=     0.1MB
+n=   100,000  Cuckoo filter  build=    0.15s  lookup=      1.60us  fp=0.0014  mem=     0.3MB
+n= 1,000,000  Linear search  build=    0.00s  lookup=  11507.42us  fp=0.0000  mem=    68.4MB
+n= 1,000,000  Binary search  build=    0.27s  lookup=      2.66us  fp=0.0000  mem=    68.4MB
+n= 1,000,000  Hash table     build=    4.55s  lookup=      1.25us  fp=0.0000  mem=   220.5MB
+n= 1,000,000  Bloom filter   build=    2.82s  lookup=      2.11us  fp=0.0100  mem=     1.2MB
+n= 1,000,000  Cuckoo filter  build=    1.59s  lookup=      1.76us  fp=0.0009  mem=     4.2MB
+n=10,000,000  Linear search  build=    0.03s  lookup= 115106.39us  fp=0.0000  mem=   686.0MB
+n=10,000,000  Binary search  build=    4.08s  lookup=      4.44us  fp=0.0000  mem=   686.0MB
+n=10,000,000  Hash table     build=   38.53s  lookup=      1.33us  fp=0.0000  mem=  1929.5MB
+n=10,000,000  Bloom filter   build=   32.22s  lookup=      2.43us  fp=0.0101  mem=    12.0MB
+n=10,000,000  Cuckoo filter  build=   16.13s  lookup=      1.82us  fp=0.0010  mem=    33.6MB
+Results written to /Users/mahdieh/Desktop/UBC/Courses/Term 3/COSC 520/assignment/login-checker/results/results.csv

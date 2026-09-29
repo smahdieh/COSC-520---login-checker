@@ -21,7 +21,8 @@ login-checker/
 ├── data/                  # dataset generator (generated data is not committed)
 ├── benchmarks/            # timing scripts and plotting
 ├── results/               # benchmark CSVs and figures
-└── tests/                 # unit tests (pytest)
+├── tests/                 # unit tests (pytest)
+└── demo.py                # short demo of all five structures
 ```
 
 ## Setup
@@ -45,10 +46,36 @@ python data/generate_logins.py --n 100000
 # 2. Run the unit tests
 pytest
 
-# 3. Run the benchmarks and make plots
-python benchmarks/run_benchmarks.py     # TODO: document arguments
+# 3. Quick demo (5 structures on 100K logins, a few seconds)
+python demo.py
+
+# 4. Run the benchmarks (n = 1e3 .. 1e7, about 10-15 min) and make plots
+python benchmarks/run_benchmarks.py
 python benchmarks/plot_results.py
 ```
+
+Benchmark options:
+
+| Option | Default | Meaning |
+|---|---|---|
+| `--sizes` | `1000 10000 100000 1000000 10000000` | values of n to test |
+| `--structures` | all five | e.g. `--structures "Hash table" "Bloom filter"` |
+| `--queries` | `10000` | taken and new lookups per structure (each) |
+| `--linear-queries` | `50` | fewer lookups for linear search, since it is O(n) |
+| `--repeats` | `3` | timing repeats; the median is reported |
+
+For each n, every structure is built from the first n logins, then timed on
+lookups of logins that are taken (sampled from those n) and new (from
+`absent_logins.txt`). False positive rates for the filters use all 100,000
+absent logins. Output: `results/results.csv` and the plots in `results/`:
+
+| Plot | Shows |
+|---|---|
+| `lookup_time.png` | time per lookup vs n, all five structures |
+| `lookup_time_fast.png` | same, without linear search |
+| `build_time.png` | time to insert all n logins |
+| `memory.png` | bytes used vs n |
+| `false_positive_rate.png` | Bloom and Cuckoo: measured vs theoretical |
 
 ## Dataset
 
@@ -82,10 +109,16 @@ Generated with Claude (Anthropic), then reviewed and tested by me:
 - Initial versions of all data structures in `src/login_checker/`
   (`hashing.py`, `linear_search.py`, `binary_search.py`, `hash_table.py`,
   `bloom_filter.py`, `cuckoo_filter.py`) and their unit tests in `tests/`
+- Dataset generator (`dataset.py`, `data/generate_logins.py`, `test_dataset.py`)
+- Benchmark and plotting scripts (`benchmarks/`) and `demo.py`
 
 My changes and additions: TODO (list what you modified in each file, and what
 you wrote yourself, e.g. dataset generator, benchmarks, plots).
 
 ## References
 
-TODO
+1. T. H. Cormen, C. E. Leiserson, R. L. Rivest, C. Stein. *Introduction to Algorithms*, 4th ed. MIT Press, 2022.
+2. B. H. Bloom. Space/time trade-offs in hash coding with allowable errors. *Communications of the ACM* 13(7), 1970.
+3. A. Broder, M. Mitzenmacher. Network applications of Bloom filters: A survey. *Internet Mathematics* 1(4), 2004.
+4. A. Kirsch, M. Mitzenmacher. Less hashing, same performance: Building a better Bloom filter. *ESA*, 2006.
+5. B. Fan, D. G. Andersen, M. Kaminsky, M. Mitzenmacher. Cuckoo filter: Practically better than Bloom. *CoNEXT*, 2014.
