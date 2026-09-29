@@ -52,7 +52,9 @@ python benchmarks/plot_results.py
 
 ## Dataset
 
-Download: TODO (link to uploaded dataset)
+Download: https://doi.org/10.5281/zenodo.23045991
+
+> Sadatbenis, M. (2026). *Login Dataset for COSC 520 Login Checker* [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.23045991
 
 Or regenerate it exactly with `python data/generate_logins.py` (seed 520).
 
