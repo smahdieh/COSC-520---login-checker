@@ -76,6 +76,9 @@ absent logins. Output: `results/results.csv` and the plots in `results/`:
 | `build_time.png` | time to insert all n logins |
 | `memory.png` | bytes used vs n |
 | `false_positive_rate.png` | Bloom and Cuckoo: measured vs theoretical |
+| `report_lookup.png`, `report_build_memory.png` | two-panel versions used in the report |
+
+Every plot is also saved as a `.pdf` for use in LaTeX.
 
 ## Dataset
 

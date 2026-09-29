@@ -129,7 +129,7 @@ def fp_plot(df, out_path) -> None:
 
     Input: data, output file. Output: None (saves a PNG).
     """
-    fig, ax = plt.subplots(figsize=FIG_SIZE)
+    fig, ax = plt.subplots(figsize=(FIG_SIZE[0], 2.2))
     for name in ("Bloom filter", "Cuckoo filter"):
         rows = df[df["structure"] == name]
         color = PALETTE[name]
@@ -141,6 +141,37 @@ def fp_plot(df, out_path) -> None:
     ax.set_ylim(bottom=0)
     ax.legend(frameon=False, loc="center right")
     finish(fig, ax, "False positives (%)", out_path)
+
+
+def pair_plot(df, left, right, out_path) -> None:
+    """Draw two panels side by side with one shared legend on top (for the report).
+
+    Input: data, left and right panel settings as (column, y label,
+    structures, log y), output file. Output: None (saves PNG and PDF).
+    """
+    fig, axes = plt.subplots(1, 2, figsize=(FIG_SIZE[0], 2.4))
+    for ax, (field, ylabel, names, log_y) in zip(axes, (left, right)):
+        for name in names:
+            rows = df[(df["structure"] == name) & (df[field] > 0)]
+            ax.plot(rows["n"], rows[field], color=PALETTE[name], marker=MARKERS[name],
+                    markersize=4, markeredgecolor="white", markeredgewidth=0.6,
+                    linewidth=1.3, label=name)
+        ax.set_xscale("log")
+        if log_y:
+            ax.set_yscale("log")
+        else:
+            ax.set_ylim(bottom=0)
+        ax.set_xlabel("Number of logins $n$")
+        ax.set_ylabel(ylabel)
+        sns.despine(ax=ax)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="upper center", ncol=len(labels), frameon=False,
+               handlelength=1.5, columnspacing=1.0)
+    fig.tight_layout(rect=(0, 0, 1, 0.9))
+    fig.savefig(out_path, dpi=300)
+    fig.savefig(out_path.with_suffix(".pdf"))
+    plt.close(fig)
+    print(f"Saved {out_path} and .pdf")
 
 
 def main() -> None:
@@ -161,6 +192,14 @@ def main() -> None:
     line_plot(df, "memory_bytes", "Memory (bytes, log scale)", out / "memory.png",
               note="Linear and binary search store the same strings, so their lines overlap.")
     fp_plot(df, out / "false_positive_rate.png")
+
+    # Two-panel versions used in the report, to save space.
+    pair_plot(df, ("lookup_us", "Time per lookup (µs, log)", ORDER, True),
+              ("lookup_us", "Time per lookup (µs)", ORDER[1:], False),
+              out / "report_lookup.png")
+    pair_plot(df, ("build_s", "Build time (s, log)", ORDER, True),
+              ("memory_bytes", "Memory (bytes, log)", ORDER, True),
+              out / "report_build_memory.png")
 
 
 if __name__ == "__main__":
