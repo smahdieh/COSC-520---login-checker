@@ -23,7 +23,7 @@ ORDER = ["Linear search", "Binary search", "Hash table", "Bloom filter", "Cuckoo
 # Okabe-Ito colorblind-safe colors, chosen so no two lines look alike.
 # Each structure keeps the same color and marker in every plot.
 PALETTE = {
-    "Linear search": "#3b3b3b",  # dark gray (baseline)
+    "Linear search": "#d55e00",  # vermillion
     "Binary search": "#0072b2",  # blue
     "Hash table": "#009e73",     # green
     "Bloom filter": "#e69f00",   # orange
