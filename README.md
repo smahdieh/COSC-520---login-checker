@@ -57,11 +57,12 @@ TODO: link to the uploaded dataset (Zenodo / Kaggle / Hugging Face / Drive).
 Generated with Claude (Anthropic), then reviewed and tested by me:
 
 - Repository skeleton: folder layout, config files, README outline, `base.py` interface
-- `hashing.py`, `linear_search.py`, `binary_search.py` and their tests
-  (`test_hashing.py`, `test_linear_search.py`, `test_binary_search.py`)
+- Initial versions of all data structures in `src/login_checker/`
+  (`hashing.py`, `linear_search.py`, `binary_search.py`, `hash_table.py`,
+  `bloom_filter.py`, `cuckoo_filter.py`) and their unit tests in `tests/`
 
-Written by me: TODO (e.g. `hash_table.py`, `bloom_filter.py`, `cuckoo_filter.py`,
-their tests, dataset generator, benchmarks).
+My changes and additions: TODO (list what you modified in each file, and what
+you wrote yourself, e.g. dataset generator, benchmarks, plots).
 
 ## References
 
