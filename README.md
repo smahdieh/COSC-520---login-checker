@@ -112,8 +112,6 @@ Generated with Claude (Anthropic), then reviewed and tested by me:
 - Initial versions of all data structures in `src/login_checker/`
   (`hashing.py`, `linear_search.py`, `binary_search.py`, `hash_table.py`,
   `bloom_filter.py`, `cuckoo_filter.py`) and their unit tests in `tests/`
-- Dataset generator (`dataset.py`, `data/generate_logins.py`, `test_dataset.py`)
-- Benchmark and plotting scripts (`benchmarks/`) and `demo.py`
 
 My changes and additions: TODO (list what you modified in each file, and what
 you wrote yourself, e.g. dataset generator, benchmarks, plots).
